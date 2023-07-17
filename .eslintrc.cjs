@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: ['react-refresh', 'simple-import-sort', 'unused-imports'],
   rules: {
-    'no-var': 'erorr',
+    'no-var': 2,
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-non-null-assertion': 'off',
