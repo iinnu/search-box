@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { styled } from 'styled-components';
 
 import { SearchForm } from './SearchForm/SearchForm';
 import { SearchRecommend } from './SearchRecommend/SearchRecommend';
@@ -18,15 +17,9 @@ export function Search() {
   };
 
   return (
-    <Container>
+    <div>
       <SearchForm keyword={keyword} onChange={handleKeywordChange} />
       <SearchRecommend recommend={recommend} />
-    </Container>
+    </div>
   );
 }
-
-const Container = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-`;
