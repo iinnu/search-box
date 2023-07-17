@@ -6,8 +6,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react-hooks/recommended',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,10 +18,19 @@ module.exports = {
   },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'no-var': 'erorr',
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^', '^@'],
+          ['/^@/', '^./', '^../'],
+        ],
+      },
+    ],
+    'unused-imports/no-unused-imports': 'error',
   },
 };
