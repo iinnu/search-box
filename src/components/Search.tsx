@@ -1,20 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SearchForm } from './SearchForm/SearchForm';
 import { SearchRecommend } from './SearchRecommend/SearchRecommend';
 import { getRecommendedKeywords } from '@/api/search';
+import { useDebounce } from '@/hooks/useDebounce';
 import { Sick } from '@/types';
 
 export function Search() {
   const [keyword, setKeyword] = useState('');
   const [recommend, setRecommend] = useState<Sick[]>([]);
 
-  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value);
+  const fetchRecommend = async (value: string) => {
+    if (!value) {
+      setRecommend([]);
+      return;
+    }
     console.info('calling api');
-    if (event.target.value === '') setRecommend([]);
-    else getRecommendedKeywords(event.target.value).then((res) => setRecommend(res));
+    const response = await getRecommendedKeywords(value);
+    setRecommend(response);
   };
+
+  const debouncedFetch = useDebounce(fetchRecommend, 200);
+
+  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setKeyword(value);
+  };
+
+  useEffect(() => {
+    debouncedFetch(keyword);
+  }, [keyword]);
 
   return (
     <div>

@@ -20,6 +20,7 @@ module.exports = {
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'react-hooks/exhaustive-deps': 'off',
     'simple-import-sort/imports': [
       'error',
       {

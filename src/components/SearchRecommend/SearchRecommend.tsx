@@ -10,6 +10,7 @@ export function SearchRecommend({ recommend }: { recommend: Sick[] }) {
           추천 검색어
         </Text>
         <List>
+          {recommend.length === 0 && <Text color="gray">검색어 없음</Text>}
           {recommend.map((item) => (
             <ListItem key={item.sickCd}>{item.sickNm}</ListItem>
           ))}
