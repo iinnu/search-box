@@ -7,7 +7,14 @@
     "start": "vite --port 3000",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write --cache",
     "preview": "vite preview"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run format",
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "react": "^18.2.0",
