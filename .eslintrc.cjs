@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -16,7 +14,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'simple-import-sort', 'unused-imports'],
   rules: {
     'no-var': 'erorr',
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
