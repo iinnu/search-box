@@ -21,6 +21,7 @@ export const Input = styled.input`
   border: none;
   font-size: 18px;
   background-color: unset;
+  width: 100%;
 
   &:focus {
     outline: none;

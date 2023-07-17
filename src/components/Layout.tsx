@@ -33,4 +33,5 @@ const Header = styled.div`
   font-size: 30px;
   font-weight: 700;
   text-align: center;
+  padding: 20px 0;
 `;

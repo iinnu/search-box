@@ -8,7 +8,7 @@ interface SearchFormProps {
 }
 export function SearchForm({ keyword, onChange }: SearchFormProps) {
   return (
-    <form>
+    <form onSubmit={(event) => event.preventDefault()}>
       <InputBase>
         <InputWithIcon>
           <FaSearch />

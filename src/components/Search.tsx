@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 
 import { SearchForm } from './SearchForm/SearchForm';
-import { SearchRecommend } from './SearchRecommend';
+import { SearchRecommend } from './SearchRecommend/SearchRecommend';
 import { getRecommendedKeywords } from '@/api/search';
 import { Sick } from '@/types';
 
