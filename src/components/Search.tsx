@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { SearchForm } from './SearchForm/SearchForm';
 import { SearchRecommend } from './SearchRecommend/SearchRecommend';
 import { getRecommendedKeywords } from '@/api/search';
+import { useSearchContext } from '@/context/useSearchContext';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { useFetch } from '@/hooks/useFetch';
@@ -10,9 +11,13 @@ import { useSelectWithArrowKey } from '@/hooks/useSelectWithArrowKey';
 import { Sick } from '@/types';
 
 export function Search() {
+  /* common */
+  const [isRecommendVisible, setIsRecommendVisible] = useState(false);
+
+  const toggleRecommendVisible = (value: boolean) => setIsRecommendVisible(value);
+
   /* SearchForm */
   const [keyword, setKeyword] = useState('');
-  const [isRecommendVisible, setIsRecommendVisible] = useState(false);
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -20,12 +25,11 @@ export function Search() {
   };
 
   /* SearchRecommend */
+  const cache = useSearchContext();
   const defferedKeyword = useDebouncedValue(keyword, 300) ?? '';
-  const { data } = useFetch<string, Sick[]>([], getRecommendedKeywords, defferedKeyword);
+  const executeFetch = useCallback(() => getRecommendedKeywords(defferedKeyword), [defferedKeyword]);
+  const { data } = useFetch<Sick[]>(executeFetch, defferedKeyword, cache);
   const [selected, handleKeydown] = useSelectWithArrowKey(data?.length);
-
-  /* common */
-  const toggleRecommendVisible = (value: boolean) => setIsRecommendVisible(value);
 
   /* click outside of Search */
   const ref = useRef(null);
