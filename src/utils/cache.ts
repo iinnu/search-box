@@ -12,16 +12,16 @@ export class CacheMap<K> {
     this.cache = new Map<CacheMapKey, CacheMapData<K>>();
   }
 
-  getTime() {
+  private getValidTime() {
     return new Date().getTime() + this.span;
   }
 
-  isExpiredData(validTime: number) {
+  private isExpiredData(validTime: number) {
     return new Date().getTime() > validTime;
   }
 
   set(key: CacheMapKey, data: K) {
-    this.cache.set(key, { data, validTime: this.getTime() });
+    this.cache.set(key, { data, validTime: this.getValidTime() });
   }
 
   get(key: CacheMapKey) {
