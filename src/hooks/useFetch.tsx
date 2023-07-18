@@ -14,7 +14,7 @@ export function useFetch<T, K>(initialState: K, fetcher: (args: T) => Promise<K>
     fetcher(args)
       .then((res) => setData(res))
       .finally(() => setIsFetching(false));
-  }, [args]);
+  }, [args, fetcher]);
 
   return { data, isFetching };
 }

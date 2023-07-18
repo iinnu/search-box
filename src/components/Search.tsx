@@ -2,10 +2,15 @@ import { useRef, useState } from 'react';
 
 import { SearchForm } from './SearchForm/SearchForm';
 import { SearchRecommend } from './SearchRecommend/SearchRecommend';
+import { getRecommendedKeywords } from '@/api/search';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { useDebouncedValue } from '@/hooks/useDebouncedValue';
+import { useFetch } from '@/hooks/useFetch';
+import { useSelectWithArrowKey } from '@/hooks/useSelectWithArrowKey';
+import { Sick } from '@/types';
 
 export function Search() {
-  const ref = useRef(null);
+  /* SearchForm */
   const [keyword, setKeyword] = useState('');
   const [isRecommendVisible, setIsRecommendVisible] = useState(false);
 
@@ -14,16 +19,27 @@ export function Search() {
     setKeyword(value);
   };
 
-  const toggleRecommendVisible = () => setIsRecommendVisible(true);
+  /* SearchRecommend */
+  const defferedKeyword = useDebouncedValue(keyword, 300) ?? '';
+  const { data } = useFetch<string, Sick[]>([], getRecommendedKeywords, defferedKeyword);
+  const [selected, handleKeydown] = useSelectWithArrowKey(data?.length);
 
-  useClickOutside(ref, () => {
-    setIsRecommendVisible(false);
-  });
+  /* common */
+  const toggleRecommendVisible = (value: boolean) => setIsRecommendVisible(value);
+
+  /* click outside of Search */
+  const ref = useRef(null);
+  useClickOutside(ref, () => toggleRecommendVisible(false));
 
   return (
     <div ref={ref}>
-      <SearchForm keyword={keyword} onChange={handleKeywordChange} onFocus={toggleRecommendVisible} />
-      {isRecommendVisible && <SearchRecommend keyword={keyword} />}
+      <SearchForm
+        keyword={keyword}
+        onChange={handleKeywordChange}
+        onFocus={toggleRecommendVisible}
+        onKeyDown={handleKeydown}
+      />
+      {isRecommendVisible && <SearchRecommend data={data ?? []} selected={selected} />}
     </div>
   );
 }

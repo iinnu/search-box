@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const Inner = styled.div`
   height: 100%;
   box-sizing: border-box;
-  padding: 25px;
+  padding: 25px 20px;
   display: grid;
   grid-template-rows: 25px 1fr;
 `;
@@ -22,6 +22,7 @@ export const List = styled.div`
   overflow: scroll;
 `;
 
-export const ListItem = styled.div`
-  margin-bottom: 30px;
+export const ListItem = styled.div<{ $selected: boolean }>`
+  padding: 12px 10px;
+  background-color: ${(props) => (props.$selected ? '#e8e8e8' : 'unset')};
 `;
