@@ -2,16 +2,15 @@ import { useEffect, useState } from 'react';
 
 import { CacheMap } from '@/utils/cache';
 
-export function useFetch<K>(fetcher: () => Promise<K>, queryKey: string, cache?: CacheMap<K>) {
+export function useFetch<K>(fetcher: () => Promise<K>, queryKey?: string, cache?: CacheMap<K>) {
   const [data, setData] = useState<K>();
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    if (cache) {
+    if (cache && queryKey) {
       const cachedData = cache.get(queryKey);
 
       if (cachedData) {
-        console.info('key: ', queryKey, 'cache: ', cachedData);
         setData(cachedData.data);
         return;
       }
@@ -22,12 +21,12 @@ export function useFetch<K>(fetcher: () => Promise<K>, queryKey: string, cache?:
       .then((res) => {
         setData(res);
 
-        if (cache) {
+        if (cache && queryKey) {
           cache.set(queryKey, res);
         }
       })
       .finally(() => setIsFetching(false));
-  }, [fetcher, cache]);
+  }, [fetcher, cache, queryKey]);
 
   return { data, isFetching };
 }
