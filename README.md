@@ -11,8 +11,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<img src="https://github.com/iinnu/search-box/assets/55791128/13572bda-bc81-48a5-8bff-7857ccb44671" width="400px" />
-<img src="https://github.com/iinnu/search-box/assets/55791128/040223c4-d21c-4b4b-8812-503dee481c2d" width="400px" />
+<img src="https://github.com/iinnu/search-box/assets/55791128/77b28365-8be0-47e3-a848-1afe35be2ef4" width="400px" />
+<img src="https://github.com/iinnu/search-box/assets/55791128/fd060662-8921-4fbf-acdc-d3461a405713" width="400px" />
+
 
 - 입력한 키워드에 따라 추천 검색어를 확인할 수 있습니다.
 - 추천 검색어를 키보드 위아래 방향키로 이동할 수 있습니다.
@@ -29,7 +30,8 @@
 
 
 ### Folder Distructure
-<img width="296" alt="스크린샷 2023-07-13 오후 11 27 28" src="https://github.com/iinnu/search-box/assets/55791128/b9ed32bd-c71d-4320-8619-0768e617d43f">
+<img width="309" alt="image" src="https://github.com/iinnu/search-box/assets/55791128/c0997767-4b45-4b59-bf5b-e45257a54050">
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
